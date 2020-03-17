@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CMR: Live COVID-19 Case count</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <br />
+            <div class="col text-center">
+                <h2>Live COVID-19 Cases in Cameroon</h2>
+                <p>As of <b><span id="now"></span></b></p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-h-square fa-2x"></i>
+                    <h2 id="total_cases" class="timer count-title count-number"></h2>
+                    <p class="count-text ">Total Cases</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-hospital-o fa-2x"></i>
+                    <h2 id="total_active_cases" class="timer count-title count-number"></h2>
+                    <p class="count-text ">Active Cases</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-wheelchair fa-2x"></i>
+                    <h2 id="total_deaths" class="timer count-title count-number"></h2>
+                    <p class="count-text ">Total Deaths</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">Made with <i class="fa fa-heart"></i> by <strong></strong>Techonda</strong></div>
+    <script>
+        let now = Date();
+        $('#now').html(now.toString());
+        $.ajax({
+            url: 'https://thevirustracker.com/free-api?countryTotal=CM',
+            dataType: 'json',
+            success: function(data) {
+                //console.log(data.countrydata[0].total_cases);
+                $('#total_cases').html(data.countrydata[0].total_cases);
+                $('#total_active_cases').html(data.countrydata[0].total_active_cases);
+                $('#total_deaths').html(data.countrydata[0].total_deaths);
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
